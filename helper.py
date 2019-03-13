@@ -120,7 +120,7 @@ def multivariate_gaussian(pos, mu, Sigma):
 
     return np.exp(-fac / 2) / N
 
-def plot_mv_gaussian(mu, Sigma, N = 200):
+def plot_mv_gaussian(mu, Sigma, N = 200, autoscale=None):
     # Our 2-dimensional distribution will be over variables X and Y
     std1 = np.sqrt(Sigma[0,0])
     std2 = np.sqrt(Sigma[1,1])
@@ -141,12 +141,14 @@ def plot_mv_gaussian(mu, Sigma, N = 200):
     ax = fig.gca(projection='3d')
     ax.plot_surface(X, Y, Z, rstride=3, cstride=3, linewidth=1, antialiased=True,
                     cmap=cm.viridis)
-
+        
     count_offseet = - np.max(Z)
     cset = ax.contourf(X, Y, Z, zdir='z', offset=count_offseet, cmap=cm.viridis)
 
     # Adjust the limits, ticks and view angle
     ax.set_zlim(count_offseet,-count_offseet)
     #ax.set_zticks(np.linspace(0,0.2,5))
+    if autoscale is not None:
+        ax.auto_scale_xyz(*autoscale)
     ax.view_init(25, -21)
     plt.show()
