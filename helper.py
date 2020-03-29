@@ -120,7 +120,7 @@ def multivariate_gaussian(pos, mu, Sigma):
 
     return np.exp(-fac / 2) / N
 
-def plot_mv_gaussian(mu, Sigma, N = 200, autoscale=None):
+def plot_mv_gaussian(mu, Sigma, N = 200, autoscale=None, show=True):
     # Our 2-dimensional distribution will be over variables X and Y
     std1 = np.sqrt(Sigma[0,0])
     std2 = np.sqrt(Sigma[1,1])
@@ -151,4 +151,5 @@ def plot_mv_gaussian(mu, Sigma, N = 200, autoscale=None):
     if autoscale is not None:
         ax.auto_scale_xyz(*autoscale)
     ax.view_init(25, -21)
-    plt.show()
+    if show:
+        plt.show()
